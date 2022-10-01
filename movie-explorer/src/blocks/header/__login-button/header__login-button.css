@@ -1,0 +1,24 @@
+.header__login-button {
+    background: #3DDC84;
+    border-radius: 3px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #000000;
+    margin: 0;
+    padding: 8px 20px;
+    text-decoration: none;
+    transition: all .1s ease-in;
+    text-align: center;
+}
+.header__login-button:hover {
+    opacity: .7;
+}
+@media screen and (max-width: 767.9px) {
+    .header__login-button {
+        padding: 5px 12px;
+        font-size: 10px;
+        line-height: 16px;
+    }   
+}

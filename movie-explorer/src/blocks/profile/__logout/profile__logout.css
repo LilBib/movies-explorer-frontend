@@ -1,0 +1,14 @@
+.profile__logout {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: #EE3465;
+    margin: 0;
+    margin-bottom: 70px;
+    transition: all .1s ease-in;
+    cursor: pointer;
+}
+.profile__logout:hover {
+    opacity: .7;
+}

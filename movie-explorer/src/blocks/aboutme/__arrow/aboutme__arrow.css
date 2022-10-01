@@ -1,0 +1,8 @@
+.aboutme__arrow {
+    width: 29px;
+    height: 56px;
+    background-image: url(../../../images/upright-arrow.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+}

@@ -1,0 +1,38 @@
+.navigation__link {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    color: #FFFFFF;
+    margin: 0;
+    margin-right: 16px;
+    text-decoration: none;
+    transition: all .1s ease-in;
+}
+.navigation__link:hover {
+    opacity: .7;
+}
+.navigation__link:last-of-type {
+    margin: 0;
+}
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+    .navigation__link {
+        margin: 0;
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 28px;
+    }
+    .navigation__link:last-of-type {
+        margin-bottom: 60vh;
+    }
+}
+@media screen and (max-width: 767.9px) {
+    .navigation__link {
+        margin: 0;
+        margin-bottom: 24px;
+    }
+    .navigation__link:last-of-type {
+        margin-bottom: 57vh;
+    }
+}

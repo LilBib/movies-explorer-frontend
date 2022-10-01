@@ -1,0 +1,15 @@
+.techs__icon {
+    background: #303030;
+    border-radius: 10px;
+    width: 90px;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+@media screen and (max-width: 767.9px) {
+    .techs__icon {
+        width: 84px;
+        height: 57px;
+    }   
+}

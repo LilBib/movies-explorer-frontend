@@ -1,0 +1,5 @@
+.aboutproject__graph-line {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}

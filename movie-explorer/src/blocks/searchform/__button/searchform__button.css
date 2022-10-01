@@ -1,0 +1,28 @@
+.searchform__button {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 80px;
+    height: 34px;
+    background: #4285F4;
+    border-radius: 48px;
+    background-image: url(../../../images/search-icon-onbutton.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 22px;
+    transition: all .1s ease-in;
+    cursor: pointer;
+}
+.searchform__button:hover {
+    opacity: .7;
+}
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+    .searchform__button {
+        top: 86px;
+    }
+}
+@media screen and (max-width: 767.9px) {
+    .searchform__button {
+        top: 98px;
+    }
+}

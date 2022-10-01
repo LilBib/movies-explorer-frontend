@@ -1,0 +1,9 @@
+.profile__form {
+    width: 410px;
+    max-width: 80%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}

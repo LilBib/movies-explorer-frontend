@@ -1,0 +1,24 @@
+.PortfolioLink {
+    height: 69px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #424242;
+    margin-bottom: 20px;
+}
+.PortfolioLink:last-of-type {
+    margin-bottom: 0;
+    height: 50px;
+    border: none;
+}
+
+@media screen and (max-width: 767.9px) {
+    .PortfolioLink {
+        height: 47px;
+    }
+    .PortfolioLink:last-of-type {
+        height: 38px;
+    }
+}

@@ -1,0 +1,9 @@
+.aboutproject__graph {
+    position: relative;
+    height: 36px;
+}
+@media screen and (max-width: 767.9px) {
+  .aboutproject__graph {
+    height: 35px;
+  }  
+} 

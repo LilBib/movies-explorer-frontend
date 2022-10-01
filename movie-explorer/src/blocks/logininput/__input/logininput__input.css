@@ -1,0 +1,20 @@
+.logininput__input {
+    width: calc(100% - 30px);
+    background: #2F2F2F;
+    border-radius: 8px;
+    text-align: left;
+    color: white;
+    border: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    box-shadow: none;
+    padding: 15px;
+}
+
+.logininput__input:focus {
+    box-shadow: 0 0 0 1px #ffffff;
+    border-radius: 10px;
+    outline: none;
+}
