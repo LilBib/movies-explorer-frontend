@@ -19,13 +19,11 @@ function AboutMe () {
                     <img src="https://sun9-west.userapi.com/sun9-14/s/v1/ig2/AvAc6i04Kg9ZJW3uOr42HLavY-o-HNGTxvSYbcTg11F9TK5yXkvYXyYFOpSk9B1Iyv_jCggF0QuuT1tfGPYM5bnt.jpg?size=209x221&quality=96&type=album" alt="фото студента" className="aboutme__photo"/>
                 </div>
                 <p className="aboutme__portfolio">Портфолио</p>
-                <div className="aboutme__portfolio-container">
-                    <ul>
-                        <PortfolioLink name='Статичный сайт' link='https://lilbib.github.io/how-to-learn/' />
-                        <PortfolioLink name='Адаптивный сайт' link='https://lilbib.github.io/russian-travel/' />
-                        <PortfolioLink name='Одностраничное приложение' link='https://vladimirmisakyan.mesto.project.nomoredomains.sbs/' />
-                    </ul>
-                </div>
+                <ul className="aboutme__portfolio-list">
+                    <PortfolioLink name='Статичный сайт' link='https://lilbib.github.io/how-to-learn/' />
+                    <PortfolioLink name='Адаптивный сайт' link='https://lilbib.github.io/russian-travel/' />
+                    <PortfolioLink name='Одностраничное приложение' link='https://vladimirmisakyan.mesto.project.nomoredomains.sbs/' />
+                </ul>
             </div>
         </section>
     )

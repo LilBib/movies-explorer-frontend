@@ -90,3 +90,5 @@
 @import url(./blocks/header/__nav-menu/_active/header__nav-menu_active.css);
 @import url(./blocks/navigation/__link/_active/navigation__link_active.css);
 @import url(./blocks/header/__menu-close-button/header__menu-close-button.css);
+@import url(./blocks/aboutme/__portfolio-list/aboutme__portfolio-list.css);
+@import url(./blocks/aboutme/__portfolio-link-text/aboutme__portfolio-link-text.css);
