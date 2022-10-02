@@ -9,7 +9,7 @@ function SearchForm (props) {
         <div className="SearchForm">
             <div className="searchform__container">
                 <img src={searchIcon} alt='иконка лупы поиска' className="searchform__icon" />
-                <input type='text' placeholder="Фильм" className="searchform__input"></input>
+                <input type='text' placeholder="Фильм" className="searchform__input" required />
                 <button type="submit" className="searchform__button"></button>
             </div>
             <UnderlineGrey />

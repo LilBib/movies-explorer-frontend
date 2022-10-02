@@ -4,7 +4,7 @@
     position: relative;
 }
 .aboutproject__graph_part_back::before {
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -18,7 +18,7 @@
 }
 .aboutproject__graph_part_back::after {
     position: absolute;
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;

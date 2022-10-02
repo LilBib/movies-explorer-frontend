@@ -12,6 +12,7 @@
     background-size: 22px;
     transition: all .1s ease-in;
     cursor: pointer;
+    border: none;
 }
 .searchform__button:hover {
     opacity: .7;

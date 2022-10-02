@@ -4,10 +4,16 @@
     height: 30px;
     border-radius: 36px;
     position: relative; 
+    border: none;
+    cursor: pointer;
+    transition: all .1s ease-in;
 }
 .movie__like::after {
     position: absolute;
     content: url(../../../images/save-icon-inactive.svg);
     top: 8.5px;
     left: 10px;
+}
+.movie__like:hover {
+    opacity: .7;
 }

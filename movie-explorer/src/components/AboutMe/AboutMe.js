@@ -5,7 +5,7 @@ import './AboutMe.css';
 
 function AboutMe () {
     return (
-        <div className="AboutMe">
+        <section className="AboutMe">
             <div className="aboutme__container">
                 <h2 className="main__section-title">Студент</h2>
                 <Underline />
@@ -20,12 +20,14 @@ function AboutMe () {
                 </div>
                 <p className="aboutme__portfolio">Портфолио</p>
                 <div className="aboutme__portfolio-container">
-                    <PortfolioLink name='Статичный сайт' link='https://lilbib.github.io/how-to-learn/' />
-                    <PortfolioLink name='Адаптивный сайт' link='https://lilbib.github.io/russian-travel/' />
-                    <PortfolioLink name='Одностраничное приложение' link='https://vladimirmisakyan.mesto.project.nomoredomains.sbs/' />
+                    <ul>
+                        <PortfolioLink name='Статичный сайт' link='https://lilbib.github.io/how-to-learn/' />
+                        <PortfolioLink name='Адаптивный сайт' link='https://lilbib.github.io/russian-travel/' />
+                        <PortfolioLink name='Одностраничное приложение' link='https://vladimirmisakyan.mesto.project.nomoredomains.sbs/' />
+                    </ul>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

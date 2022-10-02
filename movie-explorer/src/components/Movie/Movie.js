@@ -13,7 +13,7 @@ function Movie ({duration, nameRU, thumbnail}) {
                     <p className="movie__title">{nameRU}</p>
                     <p className="movie__duration">{duration}</p>
                 </div>
-                <div className={isLiked ? `movie__like movie__like_active` : `movie__like`} onClick={onLikeClick}></div>
+                <button className={isLiked ? `movie__like movie__like_active` : `movie__like`} onClick={onLikeClick}></button>
             </div>
             <img src={thumbnail} alt='Постер к фильму' className="movie__image" />
         </div>

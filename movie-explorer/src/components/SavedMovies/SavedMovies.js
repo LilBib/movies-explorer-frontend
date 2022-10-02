@@ -5,12 +5,15 @@ import './SavedMovies.css'
 
 function SavedMovies (props) {
     return (
-    <div className="SavedMovies">
-        <div className="movies__container">
-            <SearchForm onCheckboxClick={props.onCheckboxClick} isCheckboxActive={props.isCheckboxActive} />
-            <MoviesCardList movies={props.movies} appWidth = {props.appWidth} />
-        </div>
-    </div>
+    <main>
+        <section className="SavedMovies">
+            <div className="movies__container">
+                <SearchForm onCheckboxClick={props.onCheckboxClick} isCheckboxActive={props.isCheckboxActive} />
+                <MoviesCardList movies={props.movies} appWidth = {props.appWidth} />
+            </div>
+        </section>
+    </main>
+    
     )
 }
 

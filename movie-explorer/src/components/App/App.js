@@ -40,9 +40,9 @@ function App() {
           path='/' 
           element={
             <>
-            <Header path='/' loggedIn={isLoggedIn} onLogoClick={onLogoClick} onProfileClick={onProfileClick} appWidth={appWidth} />
-            <Main />
-            <Footer />
+              <Header path='/' loggedIn={isLoggedIn} onLogoClick={onLogoClick} onProfileClick={onProfileClick} appWidth={appWidth} />
+                <Main />
+              <Footer />
             </>
           }
         />
@@ -51,7 +51,7 @@ function App() {
           element={
             <>
               <Header path='/movies' loggedIn={isLoggedIn} onLogoClick={onLogoClick} onProfileClick={onProfileClick} appWidth={appWidth} />
-              <Movies onCheckboxClick={onCheckboxClick} isCheckboxActive={isCheckboxActive} appWidth={appWidth} movies={foundMovies}  />
+                <Movies onCheckboxClick={onCheckboxClick} isCheckboxActive={isCheckboxActive} appWidth={appWidth} movies={foundMovies}  />
               <Footer />
             </>
           }
@@ -61,8 +61,8 @@ function App() {
           element={
             <>
               <Header path='/saved-movies' loggedIn={isLoggedIn} onLogoClick={onLogoClick} onProfileClick={onProfileClick} appWidth={appWidth} />
-              <SavedMovies onCheckboxClick={onCheckboxClick} isCheckboxActive={isCheckboxActive} appWidth={appWidth} movies={foundMovies} /> {// пока что так
-              }
+                <SavedMovies onCheckboxClick={onCheckboxClick} isCheckboxActive={isCheckboxActive} appWidth={appWidth} movies={foundMovies} /> {// пока что так
+                }             
               <Footer />
             </>
           }
