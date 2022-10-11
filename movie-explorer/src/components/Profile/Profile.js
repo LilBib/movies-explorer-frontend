@@ -2,34 +2,36 @@ import React from "react";
 import UnderlineGrey from "../UnderlineGrey/UnderlineGrey";
 import './Profile.css'
 
-function Profile ({ name, email }) {
-    const [currentName, setCurrentName] = React.useState(name);
-    const [currentEmail, setCurrentEmail] = React.useState(email);
+function Profile ({ name, email, setName, setEmail, onLogOut, onUpdateUser }) {
     const handleNameChange = (evt) => {
-        setCurrentName(evt.target.value);
+        setName(evt.target.value);
     }
     const handleEmailChange = (evt) => {
-        setCurrentEmail(evt.target.value);
+        setEmail(evt.target.value);
+    }
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        onUpdateUser();
     }
 
     return (
         <main>
             <section className="Profile">
                 <form name="change-profile-form" className="profile__form" noValidate>
-                    <h2 className="profile__greeting">{`Привет, ${currentName}!`}</h2>
+                    <h2 className="profile__greeting">{`Привет, ${name}!`}</h2>
                     <div className="profile__input-container">
                         <label htmlFor="name" className="profile__input-label">Имя</label>
-                        <input type="text" id="name" className="profile__input" defaultValue={currentName} onChange={handleNameChange} />
+                        <input type="text" id="name" className="profile__input" defaultValue={name} onChange={handleNameChange} />
                     </div>
                     <UnderlineGrey />
                     <div className="profile__input-container">
                         <label htmlFor="email" className="profile__input-label">E-mail</label>
-                        <input type="text" id="email" className="profile__input" defaultValue={currentEmail} onChange={handleEmailChange} />
+                        <input type="text" id="email" className="profile__input" defaultValue={email} onChange={handleEmailChange} />
                     </div>
                     <button className="profile__submit-button">
-                        <p className="profile__submit-button-text">Редактировать</p>
+                        <p className="profile__submit-button-text" onClick={handleUpdate}>Редактировать</p>
                     </button>
-                    <p className="profile__logout">Выйти из аккаунта</p>
+                    <p className="profile__logout" onClick={onLogOut}>Выйти из аккаунта</p>
                 </form>
             </section>
         </main>

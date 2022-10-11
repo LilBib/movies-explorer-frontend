@@ -1,5 +1,6 @@
 import React from "react";
 import Movie from "../Movie/Movie";
+import Preloader from "../Preloader/Preloader"
 import './MoviesCardList.css';
 
 function MoviesCardList (props) {
@@ -22,18 +23,24 @@ function MoviesCardList (props) {
         if (props.appWidth>=1280) {
             setMaxElemsOnPage(12);
         }
-    },[])
-    
+    },[props.isMovieCardListMounted])
+    React.useEffect(() => {
+        if (props.saved) {
+            props.setMoviesCardListMounted(true)
+        }
+    })
     
     return (
-        <>
-            <div className="MoviesCardList">
+        <>  
+            <Preloader isActive={props.isPreloaderActive} />
+            <div className={props.isMovieCardListMounted ? "MoviesCardList" : "MoviesCardList MoviesCardList__disabled" }>
                 {
                     props.movies.map((movie,i) =>{
                         if (i>=maxElemsOnPage){
                             return null;
                         }
-                        return (<Movie nameRU={movie.nameRU} duration={movie.duration} thumbnail={movie.thumbnail} key={movie._id} />)
+                        return props.saved ? (<Movie nameRU={movie.nameRU} nameEN={movie.nameEN} country={movie.country} director={movie.director} duration={movie.duration} year={movie.year} description={movie.description} image={movie.image} trailerLink={movie.trailer} thumbnail={movie.image} onSaveMovie={props.onSaveMovie} movieId={movie.movieId} key={movie._id} savedMovies={props.savedMovies} _id={movie._id}/>) 
+                        : (<Movie nameRU={movie.nameRU} nameEN={movie.nameEN} country={movie.country} director={movie.director} duration={movie.duration} year={movie.year} description={movie.description} image={`https://api.nomoreparties.co/${movie.image.url}`} trailerLink={movie.trailerLink} thumbnail={`https://api.nomoreparties.co/.${movie.image.url}`} onSaveMovie={props.onSaveMovie} movieId={movie.id} key={movie.id} savedMovies={props.savedMovies}/>)
                     })
                 }
             </div>

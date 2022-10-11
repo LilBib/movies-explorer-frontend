@@ -86,3 +86,6 @@
     background: #3DDC84;
     animation: preloader-inside-red 1s ease-in-out infinite;
 }
+.preloader__disabled {
+    display: none;
+}

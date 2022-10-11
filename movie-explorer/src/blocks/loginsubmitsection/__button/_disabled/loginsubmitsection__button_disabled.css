@@ -1,0 +1,8 @@
+.loginsubmitsection__button_disabled {
+    cursor: unset;
+    background: #DADADA;
+    color: #8B8B8B;
+}
+.loginsubmitsection__button_disabled:hover {
+    opacity: 1;
+}

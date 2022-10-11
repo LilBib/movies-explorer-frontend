@@ -8,8 +8,8 @@ function Movies (props) {
     <main>
         <section className="Movies">
             <div className="movies__container">
-                <SearchForm onCheckboxClick={props.onCheckboxClick} isCheckboxActive={props.isCheckboxActive} />
-                <MoviesCardList movies={props.movies} appWidth = {props.appWidth} />
+                <SearchForm onCheckboxClick={props.onCheckboxClick} isCheckboxActive={props.isCheckboxActive} onSearch={props.onSearch} />
+                <MoviesCardList movies={props.movies} appWidth = {props.appWidth} isMovieCardListMounted={props.isMovieCardListMounted} setMoviesCardListMounted={props.setMoviesCardListMounted} isPreloaderActive={props.isPreloaderActive} onSaveMovie={props.onSaveMovie} savedMovies={props.savedMovies} />
             </div>
         </section>
     </main>

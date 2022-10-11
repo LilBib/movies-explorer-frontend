@@ -20,3 +20,6 @@
         row-gap: 16px;
     }
 }
+.MoviesCardList__disabled {
+    display: none;
+}
