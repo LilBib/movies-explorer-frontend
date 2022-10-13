@@ -1,7 +1,7 @@
 import React from "react";
 import './Movie.css'
 
-function Movie ({nameRU, nameEN, country, director, duration, year, description, image, thumbnail, trailerLink, movieId, _id, onSaveMovie, savedMovies}) {
+function Movie ({saved, nameRU, nameEN, country, director, duration, year, description, image, thumbnail, trailerLink, movieId, _id, onSaveMovie, savedMovies}) {
     const [isLiked, setLike] = React.useState(false);
     React.useEffect(()=>{
         setLike(savedMovies.some(m=>m.nameRU.includes(nameRU)));
@@ -24,7 +24,7 @@ function Movie ({nameRU, nameEN, country, director, duration, year, description,
                     <p className="movie__title">{nameRU}</p>
                     <p className="movie__duration">{`${Math.trunc(duration/60)}ч ${duration - Math.trunc(duration/60)*60}мин`}</p>
                 </div>
-                <button className={isLiked ? `movie__like movie__like_active` : `movie__like`} onClick={onLikeClick}></button>
+                <button className={saved ? 'movie__like movie__delete' : (isLiked ? `movie__like movie__like_active` : `movie__like`)} onClick={onLikeClick}></button>
             </div>
             <img src={thumbnail} alt='Постер к фильму' className="movie__image" />
         </div>

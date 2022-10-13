@@ -7,12 +7,20 @@ function MoviesCardList (props) {
     const [maxElemsOnPage, setMaxElemsOnPage] = React.useState(0);
     const onButtonClick = () => {
         if (props.appWidth>=0) {
-            setMaxElemsOnPage(maxElemsOnPage+2)
+            const addForBeauty = maxElemsOnPage%2 ? 2-maxElemsOnPage%2 : 0
+            setMaxElemsOnPage(maxElemsOnPage+2+addForBeauty)
         }
         if (props.appWidth>=1280) {
-            setMaxElemsOnPage(maxElemsOnPage+3)
+            const addForBeauty = maxElemsOnPage%3 ? 3-maxElemsOnPage%3 : 0
+            console.log(addForBeauty)
+            setMaxElemsOnPage(maxElemsOnPage+3+addForBeauty)
         }
     }
+    React.useEffect(()=>{
+        if (props.movies.length>0) {
+            props.setMoviesCardListMounted(true)
+        } else props.setMoviesCardListMounted(false)
+    },[])
     React.useEffect(()=>{
         if (props.appWidth>0) {
             setMaxElemsOnPage(5);
@@ -23,25 +31,20 @@ function MoviesCardList (props) {
         if (props.appWidth>=1280) {
             setMaxElemsOnPage(12);
         }
-    },[props.isMovieCardListMounted])
-    React.useEffect(() => {
-        if (props.saved) {
-            props.setMoviesCardListMounted(true)
-        }
-    })
+    },[props.movies, props.isMovieCardListMounted])
     
     return (
         <>  
             <Preloader isActive={props.isPreloaderActive} />
-            <div className={props.isMovieCardListMounted ? "MoviesCardList" : "MoviesCardList MoviesCardList__disabled" }>
+            <div className={ props.movies.length>0 ? (props.isMovieCardListMounted ? "MoviesCardList" : "MoviesCardList MoviesCardList__disabled") : (props.isMovieCardListMounted&&!props.isPreloaderActive ? "MoviesCardList MoviesCardList_block" : "MoviesCardList MoviesCardList__disabled") }>
                 {
-                    props.movies.map((movie,i) =>{
+                    props.movies.length>0?props.movies.map((movie,i) =>{
                         if (i>=maxElemsOnPage){
                             return null;
                         }
-                        return props.saved ? (<Movie nameRU={movie.nameRU} nameEN={movie.nameEN} country={movie.country} director={movie.director} duration={movie.duration} year={movie.year} description={movie.description} image={movie.image} trailerLink={movie.trailer} thumbnail={movie.image} onSaveMovie={props.onSaveMovie} movieId={movie.movieId} key={movie._id} savedMovies={props.savedMovies} _id={movie._id}/>) 
+                        return props.saved ? (<Movie saved={props.saved} nameRU={movie.nameRU} nameEN={movie.nameEN} country={movie.country} director={movie.director} duration={movie.duration} year={movie.year} description={movie.description} image={movie.image} trailerLink={movie.trailer} thumbnail={movie.image} onSaveMovie={props.onSaveMovie} movieId={movie.movieId} key={movie._id} savedMovies={props.savedMovies} _id={movie._id}/>) 
                         : (<Movie nameRU={movie.nameRU} nameEN={movie.nameEN} country={movie.country} director={movie.director} duration={movie.duration} year={movie.year} description={movie.description} image={`https://api.nomoreparties.co/${movie.image.url}`} trailerLink={movie.trailerLink} thumbnail={`https://api.nomoreparties.co/.${movie.image.url}`} onSaveMovie={props.onSaveMovie} movieId={movie.id} key={movie.id} savedMovies={props.savedMovies}/>)
-                    })
+                    }):<p className="moviescardlist__notfound">Ничего не найдено</p>
                 }
             </div>
             <div className={props.movies.length<=maxElemsOnPage ? "moviescardlist__button moviescardlist__button_hidden" : "moviescardlist__button"} onClick={onButtonClick}>

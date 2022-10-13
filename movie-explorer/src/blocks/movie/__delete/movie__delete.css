@@ -1,0 +1,6 @@
+.movie__delete::after {
+    content: url(../../../images/delete-icon.svg);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

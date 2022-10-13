@@ -1,0 +1,25 @@
+.infotooltip__close-icon {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    transform: translate(100%, -100%);
+    width: 32px;
+    height: 32px;
+    background-image: url(../../../images/infotool-close-icon.svg);
+    border: none;
+    background-color: initial;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.infotooltip__close-icon:hover {
+    opacity: .7;
+}
+@media screen and (max-width: 550px) {
+    .infotooltip__close-icon {
+        top: -4px;
+        right: -4px;
+        width: 24px;
+        height: 24px;
+    }
+}

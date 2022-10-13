@@ -1,7 +1,6 @@
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes, useNavigate, Navigate } from 'react-router-dom'
 import React, { useState, useEffect, useCallback } from 'react';
 import { useElementSize } from 'use-element-size';
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -17,11 +16,13 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import './App.css';
 
 function App() {
-  const [isLoggedIn, setLogInState] = useState(false);
+  const [isLoggedIn, setLogInState] = useState(true);
   const [isCheckboxActive, setCheckbox] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [foundMovies, setFoundMovies] = useState([]);
   const [filteredFoundMovies, setFilteredFoundMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [foundSavedMovies, setFoundSavedMovies] = useState([]);
   const [appWidth, setWidth] = useState();
   const [isMovieCardListMounted, setMoviesCardListMounted] = useState(false);
   const [isPreloaderActive, setPreloaderActive] = useState(false);
@@ -34,6 +35,21 @@ function App() {
   }); 
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
+      setLogInState(true)
+    } else setLogInState(false)
+    if (localStorage.getItem('foundMovies')) {
+      setFoundMovies(JSON.parse(localStorage.getItem('foundMovies')))
+      setMoviesCardListMounted(true)
+    }
+    if (localStorage.getItem('checkbox')==='true') {
+      setCheckbox(true)
+    } else setCheckbox(false)
+    if (localStorage.getItem('searchQuery')) {
+      setSearchQuery(localStorage.getItem('searchQuery'))
+    }
+  },[])
+  useEffect(() => {
+    if (localStorage.getItem("jwt")) {
       mainApi
         .getUserInfo(localStorage.getItem("jwt"))
         .then((data) => {
@@ -44,17 +60,19 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
+          setCurrentUser({})
           setCurrentUser({ _id: ` ` });
           setCurrentUserEmail(" ");
+          setLogInState(false);
         });
-    }
-    mainApi
-      .getSavedMovies(localStorage.getItem("jwt"))
-      .then(movies=>setSavedMovies(movies))
-      .then(setFilteredSavedMovies(savedMovies))
-      .catch(err=>console.log(err))
+      mainApi
+        .getSavedMovies(localStorage.getItem("jwt"))
+        .then(movies=>setSavedMovies(movies))
+        .then(setFoundSavedMovies(savedMovies))
+        .catch(err=>console.log(err))
+    } else setLogInState(false)
   },[isLoggedIn]);
-  const onSaveMovie = useCallback ((nameRU, nameEN, country, director, duration, year, description, image, trailerLink, thumbnail, movieId, _id) => {
+  const onSaveMovie = useCallback ((nameRU, nameEN, country, director, duration, year, description, image, trailerLink, thumbnail, movieId) => {
     if (!savedMovies.some(m=>m.nameRU.includes(nameRU))){
       mainApi
         .saveMovie(nameRU, nameEN, country, director, duration, year, description, image, trailerLink, thumbnail, movieId, localStorage.getItem('jwt'))
@@ -65,25 +83,25 @@ function App() {
       const index = savedMovies.findIndex(m=>m.nameRU.includes(nameRU))
       const array = savedMovies.splice(0, savedMovies.length)
       mainApi
-        .unsaveMovie(_id, localStorage.getItem('jwt'))
+        .unsaveMovie(array[index]._id, localStorage.getItem('jwt'))
         .then(array.splice(index,1))
         .then(setSavedMovies(array))
         .catch(err=>console.log(err))
     }
   },[savedMovies])
   useEffect(() => {
-    setFilteredSavedMovies(savedMovies)
+    setFoundSavedMovies(savedMovies)
   },[savedMovies])
 
   useEffect(() => {
     if(isCheckboxActive) {
-      setFilteredSavedMovies(savedMovies.filter(movie=>movie.duration<40))
+      setFilteredSavedMovies(foundSavedMovies.filter(movie=>movie.duration<40))
       setFilteredFoundMovies(foundMovies.filter((movie)=>movie.duration<40))
     } else {
-      setFilteredSavedMovies(savedMovies)
+      setFilteredSavedMovies(foundSavedMovies)
       setFilteredFoundMovies(foundMovies)
     }
-  },[isCheckboxActive, savedMovies, foundMovies])
+  },[isCheckboxActive, savedMovies, foundMovies, foundSavedMovies])
 
   const navigate = useNavigate();
 
@@ -97,28 +115,41 @@ function App() {
     navigate('/profile', {replace: true})
   }
   const onSearch = (str) => {
-    moviesApi.getInitialCards()
-      .then(setFoundMovies([]))
-      .then(setPreloaderActive(true))
-      .then(async (res)=>{const filtered = await res.filter((movie)=>movie.nameRU.toLowerCase().includes(str.toLowerCase())); return filtered;})
-      .then(async (res)=> {
-        if(isCheckboxActive) {
-          const filtered = await res.filter((movie)=>movie.duration<40);
-          return filtered;
-        }
-        return res;
-      })
-      .then(res=>setFoundMovies(res))
-      .then(setPreloaderActive(false))
-      .finally(setMoviesCardListMounted(true));
+    setPreloaderActive(true);
+    if (localStorage.getItem('fetchedmovies')) {
+      JSON.parse(localStorage.getItem('fetchedmovies'))
+      setFoundMovies(JSON.parse(localStorage.getItem('fetchedmovies')).filter((movie)=>movie.nameRU.toLowerCase().includes(str.toLowerCase())))
+      localStorage.removeItem('foundMovies');
+      localStorage.removeItem('checkbox');
+      localStorage.removeItem('searchQuery');
+      localStorage.setItem('foundMovies', JSON.stringify(JSON.parse(localStorage.getItem('fetchedmovies')).filter((movie)=>movie.nameRU.toLowerCase().includes(str.toLowerCase()))));
+      localStorage.setItem('checkbox', isCheckboxActive);
+      localStorage.setItem('searchQuery', str);
+      setPreloaderActive(false);
+    } else {
+      moviesApi.getInitialCards()
+        .then(res=>localStorage.setItem('fetchedmovies', JSON.stringify(res)))
+        .then(setFoundMovies([]))
+        .then(async (res)=>{const filtered = await res.filter((movie)=>movie.nameRU.toLowerCase().includes(str.toLowerCase())); return filtered;})
+        .then((res) => {
+          localStorage.removeItem('foundMovies');
+          localStorage.removeItem('checkbox');
+          localStorage.removeItem('searchQuery');
+          localStorage.setItem('foundMovies', JSON.stringify(res));
+          localStorage.setItem('checkbox', isCheckboxActive);
+          localStorage.setItem('searchQuery', str);
+          return res;
+        })
+        .then(res=>setFoundMovies(res))
+        .then((res)=>{setPreloaderActive(false); return res})
+        .catch(err=>console.log(err))
+        .finally(setMoviesCardListMounted(true));
+    }
   }
   const onSavedSearch = (str) => {
-    setFilteredSavedMovies(savedMovies.filter((movie)=>movie.nameRU.toLowerCase().includes(str.toLowerCase())))
+    setFoundSavedMovies(savedMovies.filter((movie)=>movie.nameRU.toLowerCase().includes(str.toLowerCase())))
     if (str==='') {
-      setFilteredSavedMovies(savedMovies)
-    }
-    if(isCheckboxActive) {
-      setFilteredSavedMovies(savedMovies.filter(movie=>movie.duration<40))
+      setFoundSavedMovies(savedMovies)
     }
   }
   const handleSignUp = (name, email, password) => {
@@ -153,16 +184,27 @@ function App() {
   };
   const handleLogOut = () => {
     localStorage.removeItem("jwt");
+    localStorage.removeItem('foundMovies');
+    localStorage.removeItem('checkbox');
+    localStorage.removeItem('searchQuery');
+    localStorage.removeItem('fetchedmovies');
     setLogInState(false);
+    setFoundMovies([]);
+    setSavedMovies([]);
+    setFoundSavedMovies([]);
+    setFilteredFoundMovies([]);
+    setCheckbox(false);
+    setSearchQuery('');
+    setMoviesCardListMounted(false)
     navigate('/', {replace: true});
   }
   const handleUpdateUser = () => {
     mainApi
       .patchUserInfo(currentUserName, currentUserEmail, localStorage.getItem('jwt'))
       .then((data)=>{
-        setCurrentUser(data);
-        setCurrentUserEmail(data.email);
-        setCurrentUserName(data.name)
+        setCurrentUser(data.user);
+        setCurrentUserEmail(data.user.email);
+        setCurrentUserName(data.user.name)
       })
       .catch((err) => console.log(err));
   }
@@ -172,19 +214,10 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div ref={boxRef} className='App'>
         <Routes>
-          <Route
-            path='/' 
-            element={
-              <>
-                <Header path='/' loggedIn={isLoggedIn} onLogoClick={onLogoClick} onProfileClick={onProfileClick} appWidth={appWidth} />
-                  <Main />
-                <Footer />
-              </>
-            }
-          />
-                    <Route 
+          <Route 
             path='/signin' 
             element={
+              isLoggedIn ? <Navigate to='/' replace /> :
               <>
                 <Login onLogoClick={onLogoClick} onSubmit={handleSignIn} />
               </>
@@ -193,6 +226,7 @@ function App() {
           <Route 
             path='/signup' 
             element={
+              isLoggedIn ? <Navigate to='/' replace /> :
               <>
                 <Register onLogoClick={onLogoClick} onSubmit={handleSignUp} />
               </>
@@ -206,29 +240,53 @@ function App() {
               </>
             }
           />
-        </Routes>
-          <ProtectedRoute  path='/movies' loggedIn={isLoggedIn}>
-          <>
+          <Route  
+            path='/movies'
+            element={
+              isLoggedIn ? 
+              <>
                 <Header path='/movies' loggedIn={isLoggedIn} onLogoClick={onLogoClick} onProfileClick={onProfileClick} appWidth={appWidth} />
-                  <Movies onCheckboxClick={onCheckboxClick} isCheckboxActive={isCheckboxActive} appWidth={appWidth} movies={filteredFoundMovies} onSearch={onSearch} isMovieCardListMounted={isMovieCardListMounted} setMoviesCardListMounted={setMoviesCardListMounted} isPreloaderActive={isPreloaderActive} onSaveMovie={onSaveMovie} savedMovies={savedMovies} saved={false} />
+                <Movies searchQuery={searchQuery} onCheckboxClick={onCheckboxClick} isCheckboxActive={isCheckboxActive} appWidth={appWidth} movies={filteredFoundMovies} onSearch={onSearch} isMovieCardListMounted={isMovieCardListMounted} setMoviesCardListMounted={setMoviesCardListMounted} isPreloaderActive={isPreloaderActive} onSaveMovie={onSaveMovie} savedMovies={savedMovies} saved={false} />
                 <Footer />
-              </>
-          </ProtectedRoute>
-          
-          <ProtectedRoute path='/saved-movies' loggedIn={isLoggedIn}>
+              </> 
+              : <Navigate to='/' replace />
+            }
+          />
+          <Route 
+            path='/saved-movies'
+            element={
+              isLoggedIn ?
               <>
                 <Header path='/saved-movies' loggedIn={isLoggedIn} onLogoClick={onLogoClick} onProfileClick={onProfileClick} appWidth={appWidth} />
-                  <SavedMovies onCheckboxClick={onCheckboxClick} isCheckboxActive={isCheckboxActive} appWidth={appWidth} movies={filteredSavedMovies} onSearch={onSavedSearch} isMovieCardListMounted={isMovieCardListMounted} setMoviesCardListMounted={setMoviesCardListMounted} isPreloaderActive={isPreloaderActive} onSaveMovie={onSaveMovie} savedMovies={savedMovies} saved={true} />
+                <SavedMovies isPreloaderActive={isPreloaderActive} onCheckboxClick={onCheckboxClick} isCheckboxActive={isCheckboxActive} appWidth={appWidth} movies={filteredSavedMovies} onSearch={onSavedSearch} isMovieCardListMounted={isMovieCardListMounted} setMoviesCardListMounted={setMoviesCardListMounted} onSaveMovie={onSaveMovie} savedMovies={savedMovies} saved={true} />
                 <Footer />
               </>
-          </ProtectedRoute>
-          
-          <ProtectedRoute path='/profile' loggedIn={isLoggedIn}>
-            <> 
+              : <Navigate to='/' replace />
+            }
+          />
+          <Route 
+            path='/profile'
+            element={
+              isLoggedIn ?
+              <> 
                 <Header path='/profile' loggedIn={isLoggedIn} onLogoClick={onLogoClick} onProfileClick={onProfileClick} appWidth={appWidth} />
                 <Profile name={currentUserName} email={currentUserEmail} setName={setCurrentUserName} setEmail={setCurrentUserEmail} onLogOut={handleLogOut} onUpdateUser={handleUpdateUser} />
               </>
-          </ProtectedRoute>
+              : <Navigate to='/' replace />
+            }
+          />
+          <Route
+            path='/' 
+            element={
+              <>
+                <Header path='/' loggedIn={isLoggedIn} onLogoClick={onLogoClick} onProfileClick={onProfileClick} appWidth={appWidth} />
+                <Main />
+                <Footer />
+              </>
+            }
+          />
+          <Route path='/*' element={<Navigate to='/404' replace />} />
+        </Routes>
       </div>
     </CurrentUserContext.Provider>
   );

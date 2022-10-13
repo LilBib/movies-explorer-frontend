@@ -23,3 +23,6 @@
 .MoviesCardList__disabled {
     display: none;
 }
+.MoviesCardList_block {
+    display: block;
+}

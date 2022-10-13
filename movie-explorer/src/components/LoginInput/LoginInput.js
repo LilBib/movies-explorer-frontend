@@ -11,7 +11,7 @@ function LoginInput ({ label, type, setValue, isDirty, setDirty, error, value, i
             setValid(value.length>0)
         }
         if (label==='Имя') {
-            setValid(value.length>2 && value.length<30)
+            setValid(value.length>1 && value.length<31)
         }
     },[value])
     const handleInputChange = (e) => {
