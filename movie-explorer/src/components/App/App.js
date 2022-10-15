@@ -253,7 +253,7 @@ function App() {
               isLoggedIn ?
               <> 
                 <Header path='/profile' loggedIn={isLoggedIn} onLogoClick={onLogoClick} onProfileClick={onProfileClick} appWidth={appWidth} />
-                <Profile name={currentUserName} email={currentUserEmail} setName={setCurrentUserName} isEmailConflicted={isEmailConflicted} setEmail={setCurrentUserEmail} onLogOut={handleLogOut} onUpdateUser={handleUpdateUser} />
+                <Profile currentUser={currentUser} name={currentUserName} email={currentUserEmail} setName={setCurrentUserName} isEmailConflicted={isEmailConflicted} setEmail={setCurrentUserEmail} onLogOut={handleLogOut} onUpdateUser={handleUpdateUser} />
               </>
               : <Navigate to='/' replace />
             }

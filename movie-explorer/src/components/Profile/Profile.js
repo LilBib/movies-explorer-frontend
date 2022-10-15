@@ -4,7 +4,7 @@ import UnderlineGrey from "../UnderlineGrey/UnderlineGrey";
 import InfoToolTip from "../InfoToolTip/InfoToolTip";
 import './Profile.css';
 
-function Profile ({ isEmailConflicted, name, email, setName, setEmail, onLogOut, onUpdateUser }) {
+function Profile ({ currentUser, isEmailConflicted, name, email, setName, setEmail, onLogOut, onUpdateUser }) {
     const [isInfoToolTipOpen, setInfoToolTipOpen] = React.useState(false);
     const [isNameChanged, setNameChanged] = React.useState(false);
     const [isEmailChanged, setEmailChanged] = React.useState(false);
@@ -24,11 +24,13 @@ function Profile ({ isEmailConflicted, name, email, setName, setEmail, onLogOut,
     }
     useEffect(()=> {
         if (isEmailConflicted) {
-            setEmail(email)
-            setName(name)
-            setUpdateSucceed(false)
+            setEmail(currentUser.email)
+            setName(currentUser.name)
+            document.getElementById('name').value=name;
+            document.getElementById('email').value=email;
+            setUpdateSucceed(false);
         }
-    },[isEmailConflicted])
+    },[isEmailConflicted, isUpdateSucceed])
     const handleUpdate = (e) => {
         e.preventDefault();
         if (isAllowed){

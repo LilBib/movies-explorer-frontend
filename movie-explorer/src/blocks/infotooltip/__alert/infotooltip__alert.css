@@ -8,3 +8,8 @@
     width: 358px;
     margin: 0;
 }
+@media screen and (max-width: 550px) {
+    .infotooltip__alert {
+        width: 246px;
+    }
+}
