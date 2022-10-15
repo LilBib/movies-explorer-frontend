@@ -5,6 +5,7 @@ import './MoviesCardList.css';
 
 function MoviesCardList (props) {
     const [maxElemsOnPage, setMaxElemsOnPage] = React.useState(0);
+    const [didWidthPropsChanged, setWidthPropsChanged] = React.useState(false);
     const onButtonClick = () => {
         if (props.appWidth>=0) {
             const addForBeauty = maxElemsOnPage%2 ? 2-maxElemsOnPage%2 : 0
@@ -12,26 +13,23 @@ function MoviesCardList (props) {
         }
         if (props.appWidth>=1280) {
             const addForBeauty = maxElemsOnPage%3 ? 3-maxElemsOnPage%3 : 0
-            console.log(addForBeauty)
             setMaxElemsOnPage(maxElemsOnPage+3+addForBeauty)
         }
     }
     React.useEffect(()=>{
-        if (props.movies.length>0) {
-            props.setMoviesCardListMounted(true)
-        } else props.setMoviesCardListMounted(false)
-    },[])
-    React.useEffect(()=>{
-        if (props.appWidth>0) {
-            setMaxElemsOnPage(5);
+        if (!didWidthPropsChanged && props.appWidth!==undefined) {
+            if (props.appWidth>0) {
+                setMaxElemsOnPage(5);
+            }
+            if (props.appWidth>=768) {
+                setMaxElemsOnPage(8);
+            }
+            if (props.appWidth>=1280) {
+                setMaxElemsOnPage(12);
+            }
+            setWidthPropsChanged(true);
         }
-        if (props.appWidth>=768) {
-            setMaxElemsOnPage(8);
-        }
-        if (props.appWidth>=1280) {
-            setMaxElemsOnPage(12);
-        }
-    },[props.movies, props.isMovieCardListMounted])
+    },[props.appWidth])
     
     return (
         <>  

@@ -11,6 +11,7 @@ function Profile ({ name, email, setName, setEmail, onLogOut, onUpdateUser }) {
     const [isNameValid, setNameValid] = React.useState(true);
     const [isEmailValid, setEmailValid] = React.useState(true);
     const [isAllowed, setAllowed] = React.useState(false);
+    const [isUpdateSucceed, setUpdateSucceed] = React.useState(false);
     const handleNameChange = (evt) => {
         setName(evt.target.value);
         setNameChanged(true);
@@ -25,10 +26,15 @@ function Profile ({ name, email, setName, setEmail, onLogOut, onUpdateUser }) {
         e.preventDefault();
         if (isAllowed){
             onUpdateUser();
+            setUpdateSucceed(true);
             setInfoToolTipOpen(true)
         } else {
+            setUpdateSucceed(false);
             setInfoToolTipOpen(true)
         }
+        setNameChanged(false);
+        setEmailChanged(false);
+        setAllowed(false)
     }
     React.useEffect(()=>{
         if ((isEmailChanged || isNameChanged) && isNameValid && isEmailValid) {
@@ -39,7 +45,7 @@ function Profile ({ name, email, setName, setEmail, onLogOut, onUpdateUser }) {
     return (
         <main>
             <section className="Profile">
-                <InfoToolTip isSucceed={isAllowed} isOpen={isInfoToolTipOpen} setOpen={setInfoToolTipOpen} />
+                <InfoToolTip isSucceed={isUpdateSucceed} isOpen={isInfoToolTipOpen} setOpen={setInfoToolTipOpen} />
                 <form name="change-profile-form" className="profile__form" noValidate onSubmit={handleUpdate}>
                     <h2 className="profile__greeting">{`Привет, ${name}!`}</h2>
                     <div className="profile__input-container">

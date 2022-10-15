@@ -5,7 +5,7 @@ import './SearchForm.css';
 import searchIcon from '../../images/search-icon.svg';
 
 function SearchForm (props) {
-    const [query, setQuery] = React.useState('');
+    const [query, setQuery] = React.useState(props.searchQuery);
     const [isDirty, setDirty] = React.useState(false);
     function handleInputChange (e) {
         setQuery(e.target.value)
