@@ -29,7 +29,7 @@ function InfoToolTip (props) {
             <div className='infotooltip__container'>
                 <button type="button" className="infotooltip__close-icon" onClick={closeByButtonCLick}></button>
                 <img className="infotooltip__union" src={`${props.isSucceed ? successUnion : failUnion}`} alt='иконка, сообщающая об (не)успешности авторизации' />
-                <h2 className="infotooltip__alert">{`${props.isSucceed ? 'Вы успешно отредактировали профиль!' : `Что-то пошло не так! Попробуйте ещё раз.`}`}</h2>
+                <h2 className="infotooltip__alert">{`${props.isEmailConflicted?'Пользователь с такой почтой уже существует!':(props.isSucceed ? 'Вы успешно отредактировали профиль!' : `Что-то пошло не так! Попробуйте ещё раз.`)}`}</h2>
             </div>
         </div>
     )

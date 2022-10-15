@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import validator from "validator";
 import UnderlineGrey from "../UnderlineGrey/UnderlineGrey";
 import InfoToolTip from "../InfoToolTip/InfoToolTip";
-import './Profile.css'
+import './Profile.css';
 
-function Profile ({ name, email, setName, setEmail, onLogOut, onUpdateUser }) {
+function Profile ({ isEmailConflicted, name, email, setName, setEmail, onLogOut, onUpdateUser }) {
     const [isInfoToolTipOpen, setInfoToolTipOpen] = React.useState(false);
     const [isNameChanged, setNameChanged] = React.useState(false);
     const [isEmailChanged, setEmailChanged] = React.useState(false);
@@ -22,6 +22,13 @@ function Profile ({ name, email, setName, setEmail, onLogOut, onUpdateUser }) {
         setEmailChanged(true)
         setEmailValid(validator.isEmail(evt.target.value));
     }
+    useEffect(()=> {
+        if (isEmailConflicted) {
+            setEmail(email)
+            setName(name)
+            setUpdateSucceed(false)
+        }
+    },[isEmailConflicted])
     const handleUpdate = (e) => {
         e.preventDefault();
         if (isAllowed){
@@ -45,7 +52,7 @@ function Profile ({ name, email, setName, setEmail, onLogOut, onUpdateUser }) {
     return (
         <main>
             <section className="Profile">
-                <InfoToolTip isSucceed={isUpdateSucceed} isOpen={isInfoToolTipOpen} setOpen={setInfoToolTipOpen} />
+                <InfoToolTip isEmailConflicted={isEmailConflicted} isSucceed={isUpdateSucceed} isOpen={isInfoToolTipOpen} setOpen={setInfoToolTipOpen} />
                 <form name="change-profile-form" className="profile__form" noValidate onSubmit={handleUpdate}>
                     <h2 className="profile__greeting">{`Привет, ${name}!`}</h2>
                     <div className="profile__input-container">

@@ -28,9 +28,15 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [currentUserEmail, setCurrentUserEmail] = useState("");
   const [currentUserName, setCurrentUserName] = useState('');
+  const [isEmailConflicted, setEmailConflicted] = useState(false);
   const boxRef = useElementSize((size)=> {
     setWidth(size.width);
-  }); 
+  });
+  useEffect(()=> {
+    if(isCheckboxActive) {
+      localStorage.setItem('checkbox', 'true')
+    } else localStorage.setItem('checkbox', 'false')
+  },[isCheckboxActive])
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
       setLogInState(true)
@@ -175,11 +181,15 @@ function App() {
     mainApi
       .patchUserInfo(currentUserName, currentUserEmail, localStorage.getItem('jwt'))
       .then((data)=>{
+        setEmailConflicted(false);
         setCurrentUser(data.user);
         setCurrentUserEmail(data.user.email);
         setCurrentUserName(data.user.name)
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setEmailConflicted(true);
+        console.log(err)
+      });
   }
 
 
@@ -243,7 +253,7 @@ function App() {
               isLoggedIn ?
               <> 
                 <Header path='/profile' loggedIn={isLoggedIn} onLogoClick={onLogoClick} onProfileClick={onProfileClick} appWidth={appWidth} />
-                <Profile name={currentUserName} email={currentUserEmail} setName={setCurrentUserName} setEmail={setCurrentUserEmail} onLogOut={handleLogOut} onUpdateUser={handleUpdateUser} />
+                <Profile name={currentUserName} email={currentUserEmail} setName={setCurrentUserName} isEmailConflicted={isEmailConflicted} setEmail={setCurrentUserEmail} onLogOut={handleLogOut} onUpdateUser={handleUpdateUser} />
               </>
               : <Navigate to='/' replace />
             }

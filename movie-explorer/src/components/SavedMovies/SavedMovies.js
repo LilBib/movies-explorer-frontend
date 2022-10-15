@@ -9,7 +9,7 @@ function SavedMovies (props) {
     const [isCheckboxActive, setCheckbox] = useState(false);
     useEffect(() => {
         setFoundSavedMovies(props.savedMovies)
-    },[props.savedMovies])
+    },[])
     useEffect(()=> {
         if(isCheckboxActive) {
             setFilteredSavedMovies(foundSavedMovies.filter(movie=>movie.duration<40))
@@ -23,6 +23,7 @@ function SavedMovies (props) {
             setFoundSavedMovies(props.savedMovies)
         }
     }
+
     const onCheckboxClick = () => {
         setCheckbox(!isCheckboxActive);
     }
@@ -31,7 +32,7 @@ function SavedMovies (props) {
         <section className="SavedMovies">
             <div className="movies__container">
                 <SearchForm onCheckboxClick={onCheckboxClick} isCheckboxActive={isCheckboxActive} onSearch={onSearch} saved={props.saved} />
-                <MoviesCardList movies={filteredSavedMovies} appWidth = {props.appWidth} isMovieCardListMounted={props.isMovieCardListMounted} setMoviesCardListMounted={props.setMoviesCardListMounted} isPreloaderActive={props.isPreloaderActive} onSaveMovie={props.onSaveMovie} savedMovies={props.savedMovies} saved={props.saved} />
+                <MoviesCardList movies={filteredSavedMovies} appWidth = {props.appWidth} isMovieCardListMounted={true} setMoviesCardListMounted={props.setMoviesCardListMounted} isPreloaderActive={props.isPreloaderActive} onSaveMovie={props.onSaveMovie} savedMovies={props.savedMovies} saved={props.saved} />
             </div>
         </section>
     </main>
