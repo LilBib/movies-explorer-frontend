@@ -187,7 +187,9 @@ function App() {
         setCurrentUserName(data.user.name)
       })
       .catch((err) => {
-        setEmailConflicted(true);
+        if (err === "Что-то пошло не так: 409") {
+          setEmailConflicted(true);
+        }
         console.log(err)
       });
   }

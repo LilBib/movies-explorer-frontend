@@ -14,14 +14,18 @@ function Profile ({ currentUser, isEmailConflicted, name, email, setName, setEma
     const [isUpdateSucceed, setUpdateSucceed] = React.useState(false);
     const handleNameChange = (evt) => {
         setName(evt.target.value);
-        setNameChanged(true);
         setNameValid(evt.target.value.length>1 && evt.target.value.length<31);
     }
     const handleEmailChange = (evt) => {
         setEmail(evt.target.value);
-        setEmailChanged(true)
         setEmailValid(validator.isEmail(evt.target.value));
     }
+    useEffect(()=>{
+        setEmailChanged(!(email===currentUser.email))
+    },[email, currentUser.email])
+    useEffect(()=>{
+        setNameChanged(!(name===currentUser.name))
+    },[name, currentUser.name])
     useEffect(()=> {
         if (isEmailConflicted) {
             setEmail(currentUser.email)
@@ -29,6 +33,9 @@ function Profile ({ currentUser, isEmailConflicted, name, email, setName, setEma
             document.getElementById('name').value=name;
             document.getElementById('email').value=email;
             setUpdateSucceed(false);
+        }
+        else {
+            setUpdateSucceed(true)
         }
     },[isEmailConflicted, isUpdateSucceed])
     const handleUpdate = (e) => {
@@ -39,11 +46,9 @@ function Profile ({ currentUser, isEmailConflicted, name, email, setName, setEma
             setInfoToolTipOpen(true)
         } else {
             setUpdateSucceed(false);
-            setInfoToolTipOpen(true)
+            setInfoToolTipOpen(false)
         }
-        setNameChanged(false);
-        setEmailChanged(false);
-        setAllowed(false)
+        setAllowed(false);
     }
     React.useEffect(()=>{
         if ((isEmailChanged || isNameChanged) && isNameValid && isEmailValid) {
