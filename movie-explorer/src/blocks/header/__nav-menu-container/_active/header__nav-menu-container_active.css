@@ -1,0 +1,10 @@
+.header__nav-menu-container_active {
+    display: block;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    background-color:  rgba(0, 0, 0, .3);
+    z-index: 3;
+}

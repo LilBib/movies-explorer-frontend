@@ -1,0 +1,14 @@
+.techs__icon-text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    margin: 0;
+}
+@media screen and (max-width: 767.9px) {
+    .techs__icon-text {
+        font-size: 12px;
+    }
+}

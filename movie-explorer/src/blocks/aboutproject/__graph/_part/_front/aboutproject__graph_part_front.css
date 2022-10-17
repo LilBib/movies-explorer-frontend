@@ -1,0 +1,48 @@
+.aboutproject__graph_part_front {
+    position: relative;
+    width: 20%;
+    background: #3DDC84;
+}
+.aboutproject__graph_part_front::before {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #000000;
+    content: "1 неделя";
+    position: absolute;
+    top: 27%;
+    left: 34.5%;
+}
+.aboutproject__graph_part_front::after {
+    position: absolute;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #8B8B8B;
+    content: 'Back-end';
+    bottom: -32px;
+    left: 34%;
+}
+@media screen and (max-width: 767.9px) {
+    .aboutproject__graph_part_front::after {
+        font-size: 11px;
+        line-height: 13px;
+        left: 20%;
+        bottom: -23px;
+    }
+    .aboutproject__graph_part_front::before {
+        font-size: 11px;
+        line-height: 13px;
+        left: 21.5%;
+        top: 30%;
+    } 
+    .aboutproject__graph_part_front{
+        width: 35%;
+    }
+}

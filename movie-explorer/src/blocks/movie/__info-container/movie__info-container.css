@@ -1,0 +1,6 @@
+.movie__info-container {
+    padding: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

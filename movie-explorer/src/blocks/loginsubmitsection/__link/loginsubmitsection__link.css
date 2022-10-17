@@ -1,0 +1,18 @@
+.loginsubmitsection__link {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #4285F4;
+    transition: all .1s ease-in;
+    cursor: pointer;
+}
+.loginsubmitsection__link:hover {
+    opacity: .7;
+}
+@media screen and (max-width: 767.9px) {
+    .loginsubmitsection__link {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

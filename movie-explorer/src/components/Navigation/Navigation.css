@@ -1,0 +1,7 @@
+.Navigation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 31px;
+    margin-right: -31px;
+}

@@ -1,0 +1,48 @@
+.aboutproject__graph_part_back {
+    background: #303030;
+    width: 80%;
+    position: relative;
+}
+.aboutproject__graph_part_back::before {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #fff;
+    content: "4 недели";
+    position: absolute;
+    top: 27%;
+    left: 46.5%;
+}
+.aboutproject__graph_part_back::after {
+    position: absolute;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #8B8B8B;
+    content: 'Front-end';
+    bottom: -30px;
+    left: 46.3%;
+}
+@media screen and (max-width: 767.9px) {
+    .aboutproject__graph_part_back {
+        width: 75%;
+    }
+    .aboutproject__graph_part_back::after {
+        font-size: 11px;
+        line-height: 13px;
+        left: 36.7%;
+        bottom: -23px;
+    }
+    .aboutproject__graph_part_back::before {
+        font-size: 11px;
+        line-height: 13px;
+        left: 37.5%;
+        top: 30%;
+    } 
+}

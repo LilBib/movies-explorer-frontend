@@ -1,0 +1,19 @@
+.techs__main-info {
+    margin: 0;
+    margin-bottom: 100px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    max-width: 440px;
+}
+@media screen and (max-width: 767.9px) {
+    .techs__main-info {
+        font-size: 11px;
+        line-height: 16px;
+        margin-bottom: 50px;
+    }
+}

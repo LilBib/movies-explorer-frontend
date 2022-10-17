@@ -1,0 +1,16 @@
+.header__menu-close-button {
+    width: 22px;
+    margin-left: 90%;
+    margin-top: 22px;
+    cursor: pointer;
+    transition: all .1s ease-in;
+}
+.header__menu-close-button:hover {
+    opacity: .7;
+}
+@media screen and (max-width: 767.9px) {
+    .header__menu-close-button {
+        margin-left: 86%;
+        margin-top: 14px;
+    }
+}

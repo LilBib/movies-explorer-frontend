@@ -1,0 +1,32 @@
+.searchform__input {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: #202020;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;    
+    color: #8B8B8B;
+    border: none;
+    margin-top: 70px;
+    margin-bottom: 15px;
+}
+
+.searchform__input:focus {
+    box-shadow: 0 0 0 1px #ffffff;
+    border-radius: 10px;
+    outline: none;
+}
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+    .searchform__input {
+        margin-top: 86px;
+    }
+}
+@media screen and (max-width: 767.9px) {
+    .searchform__input {
+        margin-top: 98px;
+    }
+}

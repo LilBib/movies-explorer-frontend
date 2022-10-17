@@ -1,0 +1,7 @@
+.footer__copyright {
+    background-image: url(../../../images/copyright2022.svg);
+    width: 48px;
+    height: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+}

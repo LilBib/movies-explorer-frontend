@@ -1,0 +1,9 @@
+.header__profile-button {
+    cursor: pointer;
+    transition: all .1s ease-in;
+    width: 100px;
+}
+
+.header__profile-button:hover {
+    opacity: .7;
+}

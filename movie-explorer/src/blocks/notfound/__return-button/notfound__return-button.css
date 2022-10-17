@@ -1,0 +1,16 @@
+.notfound__return-button {
+    margin: 0 auto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #4285F4;
+    margin-top: 26.28vh;
+    margin-bottom: 60px;
+    width: min-content;
+    cursor: pointer;
+    transition: all .1s ease-in;
+}
+.notfound__return-button:hover {
+    opacity: .7;
+}

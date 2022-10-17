@@ -1,0 +1,3 @@
+.checkbox__active::after {
+    left: 18px;
+}

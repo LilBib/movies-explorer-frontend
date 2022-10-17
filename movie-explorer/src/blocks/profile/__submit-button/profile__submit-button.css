@@ -1,0 +1,13 @@
+.profile__submit-button {
+    background-color: #202020;
+    color: white;
+    cursor: pointer;
+    transition: all .1s ease-in;
+    border: none;
+    padding: 0;
+    margin-bottom: 16px;
+    margin-top: auto;
+}
+.profile__submit-button:hover {
+    opacity: .7;
+}

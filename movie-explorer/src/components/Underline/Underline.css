@@ -1,0 +1,13 @@
+.Underline {
+    border-bottom: 1px solid #DADADA;
+    width: 100%;
+    margin-bottom: 70px;
+}
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+   
+}
+@media screen and (max-width: 767.9px) {
+    .Underline {
+        margin-bottom: 60px;
+    }
+}

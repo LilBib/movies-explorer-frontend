@@ -1,0 +1,7 @@
+.movie__like_active {
+    background: #3DDC84;
+}
+
+.movie__like_active::after {
+    content: url(../../../../images/save-icon-active.svg);
+}

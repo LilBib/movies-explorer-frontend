@@ -1,0 +1,17 @@
+.profile__input {
+    background-color: #202020;
+    text-align: right;
+    color: white;
+    border: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    box-shadow: none;
+}
+
+.profile__input:focus {
+    box-shadow: 0 0 0 1px #ffffff;
+    border-radius: 10px;
+    outline: none;
+}
